@@ -24,7 +24,7 @@
 <script lang="ts">
 import { defineComponent, ref, onMounted } from "vue";
 import { startChat, sendMessage } from "../services/chatService";
-import MarkdownIt from "markdown-it";
+import MarkdownIt from "markdown-it/index.js";
 
 export default defineComponent({
   name: "ChatApp",
