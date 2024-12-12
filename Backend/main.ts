@@ -5,4 +5,7 @@ const app = new Hono();
 
 app.route('/chat', chatRoutes);
 
-app.fire();
+export default {
+    port: 3000,
+    fetch: app.fetch,
+};
