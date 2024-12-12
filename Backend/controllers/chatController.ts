@@ -6,7 +6,11 @@ const chatService = new ChatService();
 export const startChat = async (c: Context) => {
     try {
         const response = await chatService.startChat();
-        return c.json(response);
+        if (response.response.candidates && response.response.candidates.length > 0) {
+            return c.json(response.response.candidates[0].content.parts[0].text);
+        } else {
+            return c.json({ error: "No candidates found" }, 500);
+        }
     } catch (error) {
         if (error instanceof Error) {
             return c.json({ error: error.message }, 500);
