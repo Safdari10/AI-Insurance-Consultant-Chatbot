@@ -3,6 +3,7 @@
     "dev": "deno run --watch main.ts"
   },
   "imports": {
+    "hono@latest": "npm:hono@latest",
     "@google/generative-ai": "npm:@google/generative-ai@*", 
     "@std/assert": "jsr:@std/assert@1"
   }
