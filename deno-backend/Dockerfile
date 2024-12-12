@@ -5,11 +5,8 @@ FROM denoland/deno:alpine-1.28.3
 WORKDIR /app
 
 # Copy dependency files
-COPY deno-lock.json .
+COPY deno.lock .
 COPY deno.json .
-
-# Cache the dependencies
-RUN deno cache deno.json
 
 # Copy the rest of the application code
 COPY . .
