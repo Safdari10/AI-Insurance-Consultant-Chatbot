@@ -1,5 +1,5 @@
 # Use the official Deno image as the base image
-FROM denoland/deno:alpine-1.28.3
+FROM denoland/deno:latest
 
 # Set the working directory
 WORKDIR /app
@@ -8,8 +8,8 @@ WORKDIR /app
 COPY deno.json .
 COPY deno.lock .
 
-# Cache the dependencies
-RUN deno cache deno.json
+# Cache the dependencies using Deno cache with mount
+RUN --mount=type=cache,target=/root/.deno/cache deno cache deno.json
 
 # Copy the rest of the application code
 COPY . .
@@ -21,4 +21,4 @@ COPY .env .env
 EXPOSE 3000
 
 # Command to run the application
-CMD ["deno", "run", "--allow-net", "--allow-env", "main.ts"]
+CMD ["deno", "run", "--allow-net", "--allow-env", "--allow-read", "main.ts"]
