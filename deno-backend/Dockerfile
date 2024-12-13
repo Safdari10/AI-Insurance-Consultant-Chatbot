@@ -5,8 +5,11 @@ FROM denoland/deno:alpine-1.28.3
 WORKDIR /app
 
 # Copy dependency files
-COPY deno.lock .
 COPY deno.json .
+COPY deno.lock .
+
+# Cache the dependencies
+RUN deno cache deno.json
 
 # Copy the rest of the application code
 COPY . .
@@ -18,4 +21,4 @@ COPY .env .env
 EXPOSE 3000
 
 # Command to run the application
-CMD ["run", "--allow-net", "--allow-env", "app.ts"]
+CMD ["deno", "run", "--allow-net", "--allow-env", "main.ts"]
